@@ -1,13 +1,13 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID     = credentials('Access_key')
-        AWS_SECRET_ACCESS_KEY = credentials('secret_key')
+        AWS_ACCESS_KEY_ID     = credentials('Terraform-access')
+        AWS_SECRET_ACCESS_KEY = credentials('Terraform-secret')
     }
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/goudmanju/Terraform.git', branch: 'main'
+                git url: 'https://github.com/ALEEMUDDIN138/Terraform.git', branch: 'main'
             }
         }
         stage('Terraform Init') {
@@ -26,8 +26,4 @@ pipeline {
             }
         }
     }
-}
-resource "local_file" "my_pet" {
-filename = "pets.txt"
-content = "I Like PETS"
 }
