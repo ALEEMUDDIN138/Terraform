@@ -1,4 +1,4 @@
-resource "local_file" "my_pet" {
-filename = "pets.txt"
-content = "I Like PETS"
-}
+resource "local_file" "my_work" {
+filename = "work.txt"
+content = "Not working on the terraform task-1!"
+}  
