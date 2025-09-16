@@ -9,7 +9,7 @@ terraform {
 
 variable "filename" {
   type    = list(string)
-  default = ["Apple1.txt", "Banana2.txt", "Mango3.txt"]
+  default = ["file1.txt", "file2.txt", "file3.txt"]
 }
 
 resource "local_file" "pet" {
