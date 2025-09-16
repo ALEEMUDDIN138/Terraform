@@ -1,44 +1,31 @@
 pipeline {
     agent any
-
     environment {
-        TFVARS = 'environment.tfvars'   // change only here if you rename file
+        AWS_ACCESS_KEY_ID     = credentials('Access_Key')
+        AWS_SECRET_ACCESS_KEY = credentials('Secret_key')
     }
-
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/ALEEMUDDIN138/Terraform.git'
+                , branch: 'main'
             }
         }
-
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                sh 'terraform init -upgrade'
             }
         }
-
         stage('Terraform Plan') {
             steps {
-                script {
-                    if (fileExists(env.TFVARS)) {
-                        sh "terraform plan -var-file=${env.TFVARS}"
-                    } else {
-                        sh "terraform plan"
-                    }
-                }
+                sh 'terraform plan -var-file=environment.tfvars -out=tfplan'
             }
         }
-
         stage('Terraform Apply') {
+            when {
+                branch 'main'   // only apply in main branch
+            }
             steps {
-                script {
-                    if (fileExists(env.TFVARS)) {
-                        sh "terraform apply -auto-approve -var-file=${env.TFVARS}"
-                    } else {
-                        sh "terraform apply -auto-approve"
-                    }
-                }
+                sh 'terraform apply -auto-approve tfplan'
             }
         }
     }
