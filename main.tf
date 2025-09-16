@@ -10,7 +10,7 @@ terraform {
 variable "filenames" {
   description = "List of files to create"
   type        = set(string)
-  default     = ["file1.txt", "file2.txt", "file3.txt"]
+  default     = ["Apple.txt", "Banana.txt", "Mango.txt"]
 }
 
 resource "local_file" "pet" {
