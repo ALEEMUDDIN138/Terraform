@@ -16,5 +16,5 @@ variable "filenames" {
 resource "local_file" "fruits" {
   for_each = var.filenames
   filename = "${path.module}/${each.value}"  # creates files in current module directory
-  content  = "Hello Terraform"
+  content  = "I like fruits"
 }
