@@ -7,13 +7,14 @@ terraform {
   }
 }
 
-variable "filename" {
-  type    = set(string)
-  default = ["file1.txt", "file2.txt", "file3.txt"]
+variable "filenames" {
+  description = "List of files to create"
+  type        = set(string)
+  default     = ["file1.txt", "file2.txt", "file3.txt"]
 }
 
 resource "local_file" "pet" {
-  for_each = toset(var.filename)
-  filename = each.value
+  for_each = var.filenames
+  filename = "${path.module}/${each.value}"  # creates files in current module directory
   content  = "Hello Terraform"
 }
