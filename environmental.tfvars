@@ -1,4 +1,4 @@
 resource "local_file" "example" {
-  filename = "book.txt"
-  content  = "pages"
+filename = ["Apple.txt", "Banana.txt", "Mango.txt"]
+content  = "I like fruits"
 }
